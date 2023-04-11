@@ -41,7 +41,7 @@ def modeling(slice_point, target):
     clfFile = f'RandomForestClassifier - t{target}s{slice_point}.sav'
     if clfFile not in os.listdir('models/'):
         print(f'creating {clfFile}')
-        clf  = RandomForestClassifier(n_estimators = 10, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+        clf  = RandomForestClassifier(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         clf.fit(X_train, y_train_classes[:, target - 1]);
         dump(clf, open('models/' + clfFile, 'wb'))
     
@@ -75,7 +75,7 @@ def modeling(slice_point, target):
     if regFile not in os.listdir('models/'):
         print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 0
-        reg0 = RandomForestRegressor(n_estimators = 10, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+        reg0 = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg0.fit(X_train[indx, :], y_train[indx, target - 1]);
         dump(reg0, open('models/' + regFile, 'wb'))
 
@@ -83,7 +83,7 @@ def modeling(slice_point, target):
     if regFile not in os.listdir('models/'):
         print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 1
-        reg1 = RandomForestRegressor(n_estimators = 10, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+        reg1 = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg1.fit(X_train[indx, :], y_train[indx, target - 1]);
         dump(reg1, open('models/' + regFile, 'wb'))
     
@@ -91,7 +91,7 @@ def modeling(slice_point, target):
     if regFile not in os.listdir('models/'):
         print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 2
-        reg2 = RandomForestRegressor(n_estimators = 10, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+        reg2 = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg2.fit(X_train[indx, :], y_train[indx, target - 1]);
         dump(reg2, open('models/' + regFile, 'wb'))
 
