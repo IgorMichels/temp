@@ -21,6 +21,8 @@ y_train = np.load('y_train.npy')
 X_test = np.load('X_test.npy')
 y_test = np.load('y_test.npy')
 
+if not os.path.exists('models'): os.mkdir('models')
+
 def modeling(slice_point, target):
     global X_train
     global y_train
@@ -31,12 +33,14 @@ def modeling(slice_point, target):
     y_train_classes = 1 * (y_train <= slice_point) - 1 * (y_train == 0) + 2 * (y_train > slice_point)
     clfFile = f'HistGradientBoostingClassifier - t{target}s{slice_point}.sav'
     if clfFile not in os.listdir('models/'):
+        print(f'creating {clfFile}')
         clf  = HistGradientBoostingClassifier(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         clf.fit(X_train, y_train_classes[:, target - 1]);
         dump(clf, open('models/' + clfFile, 'wb'))
 
     clfFile = f'RandomForestClassifier - t{target}s{slice_point}.sav'
     if clfFile not in os.listdir('models/'):
+        print(f'creating {clfFile}')
         clf  = RandomForestClassifier(n_estimators = 10, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         clf.fit(X_train, y_train_classes[:, target - 1]);
         dump(clf, open('models/' + clfFile, 'wb'))
@@ -44,6 +48,7 @@ def modeling(slice_point, target):
     # modelo HGB
     regFile = f'HistGradientBoostingRegressor - t{target}s{slice_point}c0.sav'
     if regFile not in os.listdir('models/'):
+        print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 0
         reg0 = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg0.fit(X_train[indx, :], y_train[indx, target - 1]);
@@ -51,6 +56,7 @@ def modeling(slice_point, target):
     
     regFile = f'HistGradientBoostingRegressor - t{target}s{slice_point}c1.sav'
     if regFile not in os.listdir('models/'):
+        print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 1
         reg1 = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg1.fit(X_train[indx, :], y_train[indx, target - 1]);
@@ -58,6 +64,7 @@ def modeling(slice_point, target):
 
     regFile = f'HistGradientBoostingRegressor - t{target}s{slice_point}c2.sav'
     if regFile not in os.listdir('models/'):
+        print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 2
         reg2 = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg2.fit(X_train[indx, :], y_train[indx, target - 1]);
@@ -66,6 +73,7 @@ def modeling(slice_point, target):
     # modelo RF
     regFile = f'RandomForestRegressor - t{target}s{slice_point}c0.sav'
     if regFile not in os.listdir('models/'):
+        print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 0
         reg0 = RandomForestRegressor(n_estimators = 10, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg0.fit(X_train[indx, :], y_train[indx, target - 1]);
@@ -73,6 +81,7 @@ def modeling(slice_point, target):
 
     regFile = f'RandomForestRegressor - t{target}s{slice_point}c1.sav'
     if regFile not in os.listdir('models/'):
+        print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 1
         reg1 = RandomForestRegressor(n_estimators = 10, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg1.fit(X_train[indx, :], y_train[indx, target - 1]);
@@ -80,6 +89,7 @@ def modeling(slice_point, target):
     
     regFile = f'RandomForestRegressor - t{target}s{slice_point}c2.sav'
     if regFile not in os.listdir('models/'):
+        print(f'creating {regFile}')
         indx = y_train_classes[:, target - 1] == 2
         reg2 = RandomForestRegressor(n_estimators = 10, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg2.fit(X_train[indx, :], y_train[indx, target - 1]);
