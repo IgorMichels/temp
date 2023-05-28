@@ -34,69 +34,69 @@ def train(X_train, y_train, t, slice_point):
     print('Classifiers')
     print('  Random Forest')
     clfFile = f'RandomForestClassifier - t{t + 1}s{slice_point}.sav'
-    if clfFile in os.listdir('models'):
-        clf = load(open('models' + clfFile, 'rb'))
+    if clfFile in os.listdir('models/'):
+        clf = load(open('models/' + clfFile, 'rb'))
     else:
         clf  = RandomForestClassifier(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         clf.fit(X_train_aux, y_train_classes);
-        dump(clf, open('models' + clfFile, 'wb'))
+        dump(clf, open('models/' + clfFile, 'wb'))
 
     print('  Hist Gradient Boosting')
     clfFile = f'HistGradientBoostingClassifier - t{t + 1}s{slice_point}.sav'
-    if clfFile in os.listdir('models'):
-        clf = load(open('models' + clfFile, 'rb'))
+    if clfFile in os.listdir('models/'):
+        clf = load(open('models/' + clfFile, 'rb'))
     else:
         clf  = HistGradientBoostingClassifier(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         clf.fit(X_train_aux, y_train_classes);
-        dump(clf, open('models' + clfFile, 'wb'))
+        dump(clf, open('models/' + clfFile, 'wb'))
 
     print('Regressors - class 1')
     print('  Random Forest')
     regFile = f'RandomForestRegressor - t{t + 1}s{slice_point}c0.sav'
-    if regFile not in os.listdir('models'):
+    if regFile not in os.listdir('models/'):
         indx = y_train_classes == 0
         reg = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models' + regFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
 
     print('  Hist Gradient Boosting')
     regFile = f'HistGradientBoostingRegressor - t{t + 1}s{slice_point}c0.sav'
-    if regFile not in os.listdir('models'):
+    if regFile not in os.listdir('models/'):
         indx = y_train_classes == 0
         reg = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models' + regFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
 
     print('Regressors - class 2')
     print('  Random Forest')
     regFile = f'RandomForestRegressor - t{t + 1}s{slice_point}c1.sav'
-    if regFile not in os.listdir('models'):
+    if regFile not in os.listdir('models/'):
         indx = y_train_classes == 1
         reg = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models' + regFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
     
     print('  Hist Gradient Boosting')
     regFile = f'HistGradientBoostingRegressor - t{t + 1}s{slice_point}c1.sav'
-    if regFile not in os.listdir('models'):
+    if regFile not in os.listdir('models/'):
         indx = y_train_classes == 1
         reg = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models' + regFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
 
     print('Regressors - class 3')
     print('  Random Forest')
     regFile = f'RandomForestRegressor - t{t + 1}s{slice_point}c2.sav'
-    if regFile not in os.listdir('models'):
+    if regFile not in os.listdir('models/'):
         indx = y_train_classes == 2
         reg = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models' + regFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
     
     print('  Hist Gradient Boosting')
     regFile = f'HistGradientBoostingRegressor - t{t + 1}s{slice_point}c2.sav'
-    if regFile not in os.listdir('models'):
+    if regFile not in os.listdir('models/'):
         indx = y_train_classes == 2
         reg = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models' + regFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
