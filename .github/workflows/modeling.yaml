@@ -1,9 +1,7 @@
 run-name: Modeling
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   Modeling:
@@ -15,6 +13,7 @@ jobs:
       matrix:
         slice: [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
         target: [0, 1, 2, 3]
+        oversampling: [0, 1]
     
     steps:
       - name: Checkout repo content
@@ -38,37 +37,10 @@ jobs:
       
       - name: Modeling
         run: |
-          python main.py -t=${{ matrix.target }} -s=${{ matrix.slice }}
+          python modeling.py -t=${{ matrix.target }} -s=${{ matrix.slice }} -o=${{ matrix.oversampling }}
 
       - name: Commit changes
         run: |
-          git add models/*
-          git pull
-          git commit -m "Automated update"
-          git push
-      
-      - name: Commit changes (backup)
-        if: ${{ failure() }}
-        run: |
-          sleep 10s
-          git add models/*
-          git pull
-          git commit -m "Automated update"
-          git push
-      
-      - name: Commit changes (backup)
-        if: ${{ failure() }}
-        run: |
-          sleep 20s
-          git add models/*
-          git pull
-          git commit -m "Automated update"
-          git push
-      
-      - name: Commit changes (backup)
-        if: ${{ failure() }}
-        run: |
-          sleep 30s
           git add models/*
           git pull
           git commit -m "Automated update"
