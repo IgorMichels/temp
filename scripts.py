@@ -5,16 +5,19 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
-from joblib import dump, load
+from joblib import dump
+from glob import glob
 
-def load_data():
-    for i in range(20):
-        if i == 0: X_train = np.load('train/X_train0.npy')
-        else: X_train = np.vstack([X_train, np.load(f'train/X_train{i}.npy')])
-        if i == 0: y_train = np.load('train/y_train0.npy')
-        else: y_train = np.vstack([y_train, np.load(f'train/y_train{i}.npy')])
+def load_data(folder = 'train'):
+    for i, file in enumerate(sorted(glob(f'{folder}/X*'))):
+        if i == 0: X_data = np.load(file)
+        else: X_data = np.vstack([X_data, np.load(file)])
+        
+    for i, file in enumerate(sorted(glob(f'{folder}/y*'))):
+        if i == 0: y_data = np.load(file)
+        else: y_data = np.vstack([y_data, np.load(file)])
 
-    return X_train, y_train
+    return X_data, y_data
 
 def oversampling(X, y, step = 2):
     X_array = X.copy()
