@@ -43,5 +43,8 @@ jobs:
         run: |
           git add results/*
           git pull
+          git pull
+          git pull
+          git pull
           git commit -m "Automated update"
           git push
