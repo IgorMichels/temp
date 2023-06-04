@@ -18,8 +18,8 @@ if __name__ == '__main__':
         for oversampled in [0, 1]:
             X_data, y_data = load_data('validation')
             y_data = y_data[:, t]
-            clfs = glob(f'models/*Classifier*t{t}s{slice_point}o{oversampled}*')
-            regs = sorted(glob(f'models/*Regressor*t{t}s{slice_point}*o{oversampled}*'))
+            clfs = glob(f'models/*Classifier*t{t + 1}s{slice_point}o{oversampled}*')
+            regs = sorted(glob(f'models/*Regressor*t{t + 1}s{slice_point}*o{oversampled}*'))
 
             clfs_names = [clf.split('/')[1].split('Classifier')[0] for clf in clfs]
             regs_names = [reg.split('/')[1].split('Regressor')[0] for reg in regs]
@@ -79,7 +79,7 @@ if __name__ == '__main__':
                 final_amae = AMAE(y_obs, y_hat, points = 1000, show = False)
 
                 row = [
-                    t,
+                    t + 1,
                     slice_point,
                     oversampled == 1,
                     clfs_names[clf],
@@ -96,4 +96,4 @@ if __name__ == '__main__':
                 df.loc[len(df)] = row
 
             if 'results' not in os.listdir(): os.mkdir('results')
-            df.to_csv(f'results/t{t}s{slice_point}o{oversampled}.csv', index = False)
+            df.to_csv(f'results/t{t + 1}s{slice_point}o{oversampled}.csv', index = False)
