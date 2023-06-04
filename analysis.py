@@ -76,7 +76,7 @@ if __name__ == '__main__':
                 y_hat = np.hstack([y_hat, y_aux])
 
                 final_mae = MAE(y_hat, y_obs)
-                final_amae = AMAE(y_obs, y_hat, points = 1000, show = False)
+                final_amae = AMAE(y_obs, y_hat, points = 1000)
 
                 row = [
                     t + 1,
