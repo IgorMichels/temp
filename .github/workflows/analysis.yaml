@@ -1,4 +1,4 @@
-run-name: Modeling
+run-name: Analysis
 
 on:
   workflow_dispatch:
@@ -12,9 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         slice: [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
-        target: [0, 1, 2, 3]
-        oversampling: [0, 1]
-
+        
     steps:
       - name: Checkout repo content
         uses: actions/checkout@v2
@@ -37,7 +35,7 @@ jobs:
       
       - name: Analysis
         run: |
-          python analysis.py -t=${{ matrix.target }} -s=${{ matrix.slice }} -o=${{ matrix.oversampling }}
+          python analysis.py -s=${{ matrix.slice }}
 
       - name: Commit changes
         run: |
