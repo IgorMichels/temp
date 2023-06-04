@@ -41,7 +41,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add models/*
+          git add refined_models/*
           git pull
           git pull
           git pull
