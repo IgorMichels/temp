@@ -79,7 +79,7 @@ def train(X_train, y_train, t, slice_point, oversampled = True):
     if regFile not in os.listdir('models/'):
         reg = XGBRegressor(n_estimators = 100, random_state = 0, max_depth = 10, n_jobs = -1)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models/' + clfFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
 
     print('Regressors - class 1')
     indx = y_train_classes == 1
@@ -102,7 +102,7 @@ def train(X_train, y_train, t, slice_point, oversampled = True):
     if regFile not in os.listdir('models/'):
         reg = XGBRegressor(n_estimators = 100, random_state = 0, max_depth = 10, n_jobs = -1)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models/' + clfFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
 
     print('Regressors - class 2')
     indx = y_train_classes == 2
@@ -125,4 +125,4 @@ def train(X_train, y_train, t, slice_point, oversampled = True):
     if regFile not in os.listdir('models/'):
         reg = XGBRegressor(n_estimators = 100, random_state = 0, max_depth = 10, n_jobs = -1)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
-        dump(reg, open('models/' + clfFile, 'wb'))
+        dump(reg, open('models/' + regFile, 'wb'))
