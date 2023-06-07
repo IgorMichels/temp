@@ -52,6 +52,7 @@ jobs:
   
   Analysis:
     name: Analysis
+    needs: Modeling
     runs-on: ubuntu-latest
 
     strategy:
@@ -99,6 +100,7 @@ jobs:
   
   Remodeling:
     name: Remodeling
+    needs: Analysis
     runs-on: ubuntu-latest
     
     strategy:
