@@ -7,6 +7,8 @@ from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
 from scripts import load_data, oversampling
+from xgboost import XGBClassifier
+from xgboost import XGBRegressor
 from joblib import dump
 
 if __name__ == '__main__':
@@ -37,6 +39,7 @@ if __name__ == '__main__':
             clf_file = f"{aux['model_name']}Classifier - t{t + 1}s{slice_point}o{oversampled}.sav"
             if clf_file not in os.listdir('refined_models/'):
                 if aux['model_name'] == 'RandomForest': clf = RandomForestClassifier(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+                elif aux['model_name'] == 'XGB': clf = XGBClassifier(random_state = 0, max_depth = 10)
                 else: clf = HistGradientBoostingClassifier(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
                 clf.fit(X_train_aux, y_train_classes);
                 dump(clf, open('refined_models/' + clf_file, 'wb'))
@@ -46,6 +49,7 @@ if __name__ == '__main__':
             if reg_file not in os.listdir('refined_models/'):
                 indx = y_train_classes == 1
                 if aux['model_name'] == 'RandomForest': reg = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+                elif aux['model_name'] == 'XGB': reg = XGBRegressor(n_estimators = 100, random_state = 0, max_depth = 10, n_jobs = -1)
                 else: reg = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
                 reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
                 dump(reg, open('refined_models/' + reg_file, 'wb'))
@@ -55,6 +59,7 @@ if __name__ == '__main__':
             if reg_file not in os.listdir('refined_models/'):
                 indx = y_train_classes == 2
                 if aux['model_name'] == 'RandomForest': reg = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+                elif aux['model_name'] == 'XGB': reg = XGBRegressor(n_estimators = 100, random_state = 0, max_depth = 10, n_jobs = -1)
                 else: reg = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
                 reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
                 dump(reg, open('refined_models/' + reg_file, 'wb'))

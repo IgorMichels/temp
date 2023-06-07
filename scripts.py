@@ -5,6 +5,8 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
+from xgboost import XGBClassifier
+from xgboost import XGBRegressor
 from joblib import dump
 from glob import glob
 
@@ -38,20 +40,27 @@ def train(X_train, y_train, t, slice_point, oversampled = True):
     print('  Random Forest')
     clfFile = f'RandomForestClassifier - t{t + 1}s{slice_point}o{oversampled}.sav'
     if clfFile not in os.listdir('models/'):
-        clf  = RandomForestClassifier(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+        clf = RandomForestClassifier(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         clf.fit(X_train_aux, y_train_classes);
         dump(clf, open('models/' + clfFile, 'wb'))
 
     print('  Hist Gradient Boosting')
     clfFile = f'HistGradientBoostingClassifier - t{t + 1}s{slice_point}o{oversampled}.sav'
     if clfFile not in os.listdir('models/'):
-        clf  = HistGradientBoostingClassifier(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+        clf = HistGradientBoostingClassifier(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
+        clf.fit(X_train_aux, y_train_classes);
+        dump(clf, open('models/' + clfFile, 'wb'))
+
+    print('  XGBoost')
+    clfFile = f'XGBClassifier - t{t + 1}s{slice_point}o{oversampled}.sav'
+    if clfFile not in os.listdir('models/'):
+        clf = XGBClassifier(random_state = 0, max_depth = 10)
         clf.fit(X_train_aux, y_train_classes);
         dump(clf, open('models/' + clfFile, 'wb'))
 
     print('Regressors - class 0')
-    print('  Random Forest')
     indx = y_train_classes == 0
+    print('  Random Forest')
     regFile = f'RandomForestRegressor - t{t + 1}s{slice_point}c0o{oversampled}.sav'
     if regFile not in os.listdir('models/'):
         reg = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
@@ -65,9 +74,16 @@ def train(X_train, y_train, t, slice_point, oversampled = True):
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
         dump(reg, open('models/' + regFile, 'wb'))
 
+    print('  XGBoost')
+    regFile = f'XGBRegressor - t{t + 1}s{slice_point}c0o{oversampled}.sav'
+    if regFile not in os.listdir('models/'):
+        reg = XGBRegressor(n_estimators = 100, random_state = 0, max_depth = 10, n_jobs = -1)
+        reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
+        dump(reg, open('models/' + clfFile, 'wb'))
+
     print('Regressors - class 1')
-    print('  Random Forest')
     indx = y_train_classes == 1
+    print('  Random Forest')
     regFile = f'RandomForestRegressor - t{t + 1}s{slice_point}c1o{oversampled}.sav'
     if regFile not in os.listdir('models/'):
         reg = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
@@ -81,9 +97,16 @@ def train(X_train, y_train, t, slice_point, oversampled = True):
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
         dump(reg, open('models/' + regFile, 'wb'))
 
+    print('  XGBoost')
+    regFile = f'XGBRegressor - t{t + 1}s{slice_point}c1o{oversampled}.sav'
+    if regFile not in os.listdir('models/'):
+        reg = XGBRegressor(n_estimators = 100, random_state = 0, max_depth = 10, n_jobs = -1)
+        reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
+        dump(reg, open('models/' + clfFile, 'wb'))
+
     print('Regressors - class 2')
-    print('  Random Forest')
     indx = y_train_classes == 2
+    print('  Random Forest')
     regFile = f'RandomForestRegressor - t{t + 1}s{slice_point}c2o{oversampled}.sav'
     if regFile not in os.listdir('models/'):
         reg = RandomForestRegressor(n_estimators = 100, random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
@@ -96,3 +119,10 @@ def train(X_train, y_train, t, slice_point, oversampled = True):
         reg = HistGradientBoostingRegressor(random_state = 0, max_depth = 10, max_leaf_nodes = None, min_samples_leaf = 30)
         reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
         dump(reg, open('models/' + regFile, 'wb'))
+
+    print('  XGBoost')
+    regFile = f'XGBRegressor - t{t + 1}s{slice_point}c2o{oversampled}.sav'
+    if regFile not in os.listdir('models/'):
+        reg = XGBRegressor(n_estimators = 100, random_state = 0, max_depth = 10, n_jobs = -1)
+        reg.fit(X_train_aux[indx, :], y_train_aux[indx]);
+        dump(reg, open('models/' + clfFile, 'wb'))

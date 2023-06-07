@@ -36,10 +36,10 @@ if __name__ == '__main__':
                                          'reg0_is_post', 'reg1_is_post', 'reg2_is_post',
                                          'mae', 'amae'])
             
-            for form in product([0, 1], # clf
-                                [0, 3], # reg0
-                                [1, 4], # reg1
-                                [2, 5], # reg2
+            for form in product([0, 1, 2], # clf
+                                [0, 3, 6], # reg0
+                                [1, 4, 7], # reg1
+                                [2, 5, 8], # reg2
                                 [0, 1], # class or prob reg0
                                 [0, 1], # class or prob reg1
                                 [0, 1]  # class or prob reg2
