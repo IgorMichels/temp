@@ -6,7 +6,6 @@ on:
 jobs:
   Results:
     name: Results
-    needs: Analysis
     runs-on: ubuntu-latest
         
     steps:
