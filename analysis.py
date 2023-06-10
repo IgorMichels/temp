@@ -60,7 +60,7 @@ if __name__ == '__main__':
                     # class 1 prediction
                     inx = clfs_results[clf][1] == 1
                     y_obs = np.hstack([y_obs, y_data[inx]])
-                    if m1 == 0: y_aux = regs_results[reg0][inx]
+                    if m1 == 0: y_aux = regs_results[reg1][inx]
                     else: y_aux = regs_results[reg0][inx] * clfs_results[clf][0][inx, 0] + \
                                 regs_results[reg1][inx] * clfs_results[clf][0][inx, 1] + \
                                 regs_results[reg2][inx] * clfs_results[clf][0][inx, 2]
@@ -70,7 +70,7 @@ if __name__ == '__main__':
                     # class 2 prediction
                     inx = clfs_results[clf][1] == 2
                     y_obs = np.hstack([y_obs, y_data[inx]])
-                    if m2 == 0: y_aux = regs_results[reg0][inx]
+                    if m2 == 0: y_aux = regs_results[reg2][inx]
                     else: y_aux = regs_results[reg0][inx] * clfs_results[clf][0][inx, 0] + \
                                 regs_results[reg1][inx] * clfs_results[clf][0][inx, 1] + \
                                 regs_results[reg2][inx] * clfs_results[clf][0][inx, 2]
