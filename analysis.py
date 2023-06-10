@@ -54,16 +54,16 @@ if __name__ == '__main__':
                     y_obs = y_data[inx]
                     if m0 == 0: y_hat = regs_results[reg0][inx]
                     else: y_hat = regs_results[reg0][inx] * clfs_results[clf][0][inx, 0] + \
-                                regs_results[reg1][inx] * clfs_results[clf][0][inx, 1] + \
-                                regs_results[reg2][inx] * clfs_results[clf][0][inx, 2]
+                                  regs_results[reg1][inx] * clfs_results[clf][0][inx, 1] + \
+                                  regs_results[reg2][inx] * clfs_results[clf][0][inx, 2]
                     
                     # class 1 prediction
                     inx = clfs_results[clf][1] == 1
                     y_obs = np.hstack([y_obs, y_data[inx]])
                     if m1 == 0: y_aux = regs_results[reg1][inx]
                     else: y_aux = regs_results[reg0][inx] * clfs_results[clf][0][inx, 0] + \
-                                regs_results[reg1][inx] * clfs_results[clf][0][inx, 1] + \
-                                regs_results[reg2][inx] * clfs_results[clf][0][inx, 2]
+                                  regs_results[reg1][inx] * clfs_results[clf][0][inx, 1] + \
+                                  regs_results[reg2][inx] * clfs_results[clf][0][inx, 2]
                     
                     y_hat = np.hstack([y_hat, y_aux])
                     
@@ -72,8 +72,8 @@ if __name__ == '__main__':
                     y_obs = np.hstack([y_obs, y_data[inx]])
                     if m2 == 0: y_aux = regs_results[reg2][inx]
                     else: y_aux = regs_results[reg0][inx] * clfs_results[clf][0][inx, 0] + \
-                                regs_results[reg1][inx] * clfs_results[clf][0][inx, 1] + \
-                                regs_results[reg2][inx] * clfs_results[clf][0][inx, 2]
+                                  regs_results[reg1][inx] * clfs_results[clf][0][inx, 1] + \
+                                  regs_results[reg2][inx] * clfs_results[clf][0][inx, 2]
                     
                     y_hat = np.hstack([y_hat, y_aux])
 

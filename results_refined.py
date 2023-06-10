@@ -5,7 +5,7 @@ from glob import glob
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    files = glob('results/*')
+    files = glob('results_refined/*')
     df = pd.DataFrame()
     for file in files: df = pd.concat([df, pd.read_csv(file)], ignore_index = True)
     
@@ -27,7 +27,6 @@ if __name__ == '__main__':
         aux = aux.sort_values('mae').reset_index(drop = True)
         oversampled = aux.loc[0, 'oversampled']
         clf = aux.loc[0, 'clf']
-        reg0 = aux.loc[0, 'reg0']
         reg1 = aux.loc[0, 'reg1']
         reg2 = aux.loc[0, 'reg2']
         reg0_post = aux.loc[0, 'reg0_is_post']
@@ -35,7 +34,6 @@ if __name__ == '__main__':
         reg2_post = aux.loc[0, 'reg2_is_post']
         aux = aux[((aux['oversampled'] == oversampled) & \
                    (aux['clf'] == clf) & \
-                   (aux['reg0'] == reg0) & \
                    (aux['reg1'] == reg1) & \
                    (aux['reg2'] == reg2) & \
                    (aux['reg0_is_post'] == reg0_post) & \
@@ -49,7 +47,7 @@ if __name__ == '__main__':
         ax[graph].set_ylabel('MAE')
         ax[graph].set_title(f'Target{target}')
     
-    plt.savefig('mae.png')
+    plt.savefig('mae_2.png')
     plt.clf()
 
     fig = plt.figure(layout = 'constrained')
@@ -61,7 +59,6 @@ if __name__ == '__main__':
         aux = aux.sort_values('amae').reset_index(drop = True)
         oversampled = aux.loc[0, 'oversampled']
         clf = aux.loc[0, 'clf']
-        reg0 = aux.loc[0, 'reg0']
         reg1 = aux.loc[0, 'reg1']
         reg2 = aux.loc[0, 'reg2']
         reg0_post = aux.loc[0, 'reg0_is_post']
@@ -69,7 +66,6 @@ if __name__ == '__main__':
         reg2_post = aux.loc[0, 'reg2_is_post']
         aux = aux[((aux['oversampled'] == oversampled) & \
                    (aux['clf'] == clf) & \
-                   (aux['reg0'] == reg0) & \
                    (aux['reg1'] == reg1) & \
                    (aux['reg2'] == reg2) & \
                    (aux['reg0_is_post'] == reg0_post) & \
@@ -83,30 +79,5 @@ if __name__ == '__main__':
         ax[graph].set_ylabel('AMAE')
         ax[graph].set_title(f'Target{target}')
     
-    plt.savefig('amae.png')
+    plt.savefig('amae_2.png')
     plt.clf()
-    
-    retrain = list()
-    vars = np.linspace(-0.45, 0.45, 19)
-    for target in range(1, 5):
-        aux_target = df[df['target'] == target]
-        for metric in ['mae', 'amae']:
-            aux = aux_target.sort_values(metric, ignore_index = True).head(4)
-            for i in range(4):
-                for column in ['clf', 'reg1', 'reg2']:
-                    for var in vars:
-                        model = [aux.loc[i, 'target'],
-                                 aux.loc[i, 'slice_point'] + var,
-                                 aux.loc[i, 'oversampled'],
-                                 aux.loc[i, column],
-                                 column]
-                        
-                        if model not in retrain: retrain.append(model)
-
-    with open('retrain.csv', 'w') as f:
-        f.write('target,slice_point,oversampled,model_name,model\n')
-        for model in retrain:
-            model = [f'{arg:.2f}' if isinstance(arg, float) else str(arg) for arg in model]
-            f.write(','.join(model) + '\n')
-
-    df = pd.read_csv('retrain.csv').sort_values('slice_point')
