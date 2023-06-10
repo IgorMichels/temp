@@ -1,0 +1,17 @@
+target,slice_point,oversampled,clf,reg1,reg2,reg0_is_post,reg1_is_post,reg2_is_post,mae,amae
+3,3.9,False,XGB,HistGradientBoosting,RandomForest,False,False,False,0.5758523647979256,5701.798142733841
+3,3.9,False,XGB,HistGradientBoosting,RandomForest,False,False,True,0.534820701718045,5923.9359637258585
+3,3.9,False,XGB,HistGradientBoosting,RandomForest,False,True,False,0.706910907256234,5566.4920795290145
+3,3.9,False,XGB,HistGradientBoosting,RandomForest,False,True,True,0.6658792441763534,5788.629900521032
+3,3.9,False,XGB,HistGradientBoosting,RandomForest,True,False,False,0.5818885177821662,5701.737209182767
+3,3.9,False,XGB,HistGradientBoosting,RandomForest,True,False,True,0.5408568547022856,5923.875030174785
+3,3.9,False,XGB,HistGradientBoosting,RandomForest,True,True,False,0.7129470602404745,5566.43114597794
+3,3.9,False,XGB,HistGradientBoosting,RandomForest,True,True,True,0.6719153971605939,5788.568966969959
+3,3.9,False,XGB,RandomForest,RandomForest,False,False,False,0.5761032189164853,5702.251849461067
+3,3.9,False,XGB,RandomForest,RandomForest,False,False,True,0.535040418376386,5924.34586145822
+3,3.9,False,XGB,RandomForest,RandomForest,False,True,False,0.7070836147648136,5566.797388003797
+3,3.9,False,XGB,RandomForest,RandomForest,False,True,True,0.6660208142247144,5788.891400000951
+3,3.9,False,XGB,RandomForest,RandomForest,True,False,False,0.5820762866115115,5702.191852274964
+3,3.9,False,XGB,RandomForest,RandomForest,True,False,True,0.5410134860714122,5924.285864272117
+3,3.9,False,XGB,RandomForest,RandomForest,True,True,False,0.7130566824598396,5566.737390817695
+3,3.9,False,XGB,RandomForest,RandomForest,True,True,True,0.6719938819197403,5788.831402814847
