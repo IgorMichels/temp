@@ -1,4 +1,5 @@
 import numpy as np
+from glob import glob
 
 def MAE(y_pred, y_obs):
     return np.mean(np.abs(y_pred - y_obs))
@@ -13,15 +14,22 @@ def AMAE(y_obs, y_pred, points = 1000):
 
     return np.sum(maes) * dx
 
-if __name__ == '__main__':
-    y_pred = np.random.random(191673)
-    y_obs = np.random.random(191673)
+def load_data(folder = 'train'):
+    for i, file in enumerate(sorted(glob(f'data/{folder}/X*'))):
+        if i == 0: X_data = np.load(file)
+        else: X_data = np.vstack([X_data, np.load(file)])
+        
+    for i, file in enumerate(sorted(glob(f'data/{folder}/y*'))):
+        if i == 0: y_data = np.load(file)
+        else: y_data = np.vstack([y_data, np.load(file)])
 
-    indx = np.argsort(y_pred)
-    y_pred = y_pred[indx]
-    y_obs = y_obs[indx]
+    return X_data, y_data
 
-    y_pred = y_pred * 100
-    y_obs = y_obs / np.max(y_obs) * 100
+def oversampling(X, y, step = 2):
+    X_array = X.copy()
+    y_array = y.copy()
+    for i in range(step, 101, step):
+        X_array = np.vstack([X_array, X[y >= i]])
+        y_array = np.hstack([y_array, y[y >= i]])
 
-    print(AMAE(y_obs, y_pred))
+    return X_array, y_array

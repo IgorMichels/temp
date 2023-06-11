@@ -1,9 +1,0 @@
-target,slice_point,oversampled,clf,reg1,reg2,reg0_is_post,reg1_is_post,reg2_is_post,mae,amae
-2,0.45,False,RandomForest,RandomForest,HistGradientBoosting,False,False,False,1.4067045944760785,4000.8597602039563
-2,0.45,False,RandomForest,RandomForest,HistGradientBoosting,False,False,True,1.3386241183474317,4080.0057666481007
-2,0.45,False,RandomForest,RandomForest,HistGradientBoosting,False,True,False,1.462299361033771,4000.6400262574016
-2,0.45,False,RandomForest,RandomForest,HistGradientBoosting,False,True,True,1.3942188849051238,4079.7860327015455
-2,0.45,False,RandomForest,RandomForest,HistGradientBoosting,True,False,False,1.4067045944760785,4000.8597602039563
-2,0.45,False,RandomForest,RandomForest,HistGradientBoosting,True,False,True,1.3386241183474317,4080.0057666481007
-2,0.45,False,RandomForest,RandomForest,HistGradientBoosting,True,True,False,1.462299361033771,4000.6400262574016
-2,0.45,False,RandomForest,RandomForest,HistGradientBoosting,True,True,True,1.3942188849051238,4079.7860327015455
