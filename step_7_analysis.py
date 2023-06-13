@@ -8,6 +8,11 @@ from joblib import load
 from glob import glob
 
 if __name__ == '__main__':
+    df = pd.DataFrame(columns = ['target', 'oversampled',
+                                 'clf', 'reg1', 'reg2',
+                                 'reg0_is_post', 'reg1_is_post', 'reg2_is_post',
+                                 'mae', 'amae'])
+    
     for target, oversampled in product([1, 2, 3, 4], [False, True]):
         clf = load(open(glob(f'final_models/*Classifier*t{target}*o{oversampled}*')[0], 'rb'))
         reg1 = load(open(glob(f'final_models/*Regressor*t{target}*c1o{oversampled}*')[0], 'rb'))
@@ -24,11 +29,6 @@ if __name__ == '__main__':
         clf_results = [clf_results, np.argmax(clf_results, axis = 1)]
         reg1_results = reg1.predict(X_data)
         reg2_results = reg2.predict(X_data)
-        
-        df = pd.DataFrame(columns = ['target', 'oversampled',
-                                     'clf', 'reg1', 'reg2',
-                                     'reg0_is_post', 'reg1_is_post', 'reg2_is_post',
-                                     'mae', 'amae'])
         
         for m0, m1, m2 in product([0, 1],
                                   [0, 1],
