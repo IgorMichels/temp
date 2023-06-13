@@ -8,7 +8,7 @@ from joblib import load
 from glob import glob
 
 if __name__ == '__main__':
-    for target, oversampled in product([1, 2, 3, 4], [0, 1]):
+    for target, oversampled in product([1, 2, 3, 4], [False, True]):
         clf = load(open(glob(f'final_models/*Classifier*t{target}*o{oversampled}*')[0], 'rb'))
         reg1 = load(open(glob(f'final_models/*Regressor*t{target}*c1o{oversampled}*')[0], 'rb'))
         reg2 = load(open(glob(f'final_models/*Regressor*t{target}*c2o{oversampled}*')[0], 'rb'))
