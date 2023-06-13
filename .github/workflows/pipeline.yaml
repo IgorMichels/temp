@@ -214,7 +214,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add results/*
+          git add results_refined/*
           git pull
           git pull
           git pull
