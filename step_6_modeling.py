@@ -24,7 +24,7 @@ if __name__ == '__main__':
     X_train, y_train = load_data()
     X_train_aux, y_train_aux = load_data('validation')
     X_train = np.vstack([X_train, X_train_aux])
-    y_train = np.hstack([y_train, y_train_aux])
+    y_train = np.vstack([y_train, y_train_aux])
     del X_train_aux, y_train_aux
 
     y_train = y_train[:, t - 1]
