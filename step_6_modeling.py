@@ -23,7 +23,7 @@ if __name__ == '__main__':
     t, slice_point, oversampled, model_name, model = df.loc[line].values
     X_train, y_train = load_data()
     X_train_aux, y_train_aux = load_data('validation')
-    X_train = np.hstack([X_train, X_train_aux])
+    X_train = np.vstack([X_train, X_train_aux])
     y_train = np.hstack([y_train, y_train_aux])
     del X_train_aux, y_train_aux
 
